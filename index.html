@@ -1,37 +1,199 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Thank You Wall</title>
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .screen {
+      width: 1728px;
+      height: 960px;
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      grid-template-rows: repeat(10, 1fr);
+      gap: 4px;
+      background: white;
+      box-sizing: border-box;
+      position: relative;
+      color: black;
+    }
+    .logo {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eee;
+    }
+    .logo img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    .center-message {
+      grid-column: 7 / span 8;
+      grid-row: 5 / span 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;
+      font-family: sans-serif;
+      text-align: center;
+      font-weight: bold;
+      color: black;
+    }
   </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"/&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Customer Thank You Wall&lt;/title&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Link to CSS --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="stylesheet" href="style.css"&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="screen" id="screen"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="center-message"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>Thank You to all of our Customers</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- Link to JavaScript --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="script.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+  <div class="screen" id="screen">
+    <div class="center-message">
+      Thank You to all of our Customers
+    </div>
+  </div>
+
+  <script>
+    const screen = document.getElementById("screen");
+
+    /* ✅ Industry placeholder (optional) */
+    const industryImages = [
+      "https://www.thecooperativelogisticsnetwork.com/blog/wp-content/uploads/2022/06/short-sea-shipping.jpg"
+    ];
+
+    /* ✅ Customer logos (inside your /Images folder) */
+    const logoUrls = [
+      "Images/ALD@2x.png",
+      "Images/ASUS@2x.png",
+      "Images/ATD%20Logo%402x.png",
+      "Images/Bathing%20Brands%402x.png",
+      "Images/beautylish%402x.png",
+      "Images/Belle%20Brands%20Full%20Logo%402x.png",
+      "Images/Beyond%20Yoga%402x.png",
+      "Images/Black%20Diamond%20Equipment%402x.png",
+      "Images/Bombas%402x.png",
+      "Images/Boxbollen%402x.png",
+      "Images/Car%20Covers.com%402x.png",
+      "Images/Clark%20Core%20Services%402x.png",
+      "Images/Coulisse%402x.png",
+      "Images/Cozy%20Earth%402x.png",
+      "Images/CSafe%20Global%402x.png",
+      "Images/Cuyana%402x.png",
+      "Images/Figs%402x.png",
+      "Images/Freeport%20McMoran%402x.png",
+      "Images/HALFDAYS%20APPAREL%402x.png",
+      "Images/Hiab%20Finland%20Oy%402x.png",
+      "Images/Honest%20Company%402x.png",
+      "Images/JLab%402x.png",
+      "Images/Kate%20Somerville%402x.png",
+      "Images/Laughland%402x.png",
+      "Images/Lovevery%402x.png",
+      "Images/Lululemon%402x.png",
+      "Images/Made%20In%402x.png",
+      "Images/Matic%20Robots%402x.png",
+      "Images/Metropolitan%20Hardwood%402x.png",
+      "Images/MeUndies%402x.png",
+      "Images/Milani%20Cosmetics%402x.png",
+      "Images/Mizzen%2BMain%402x.png",
+      "Images/MNML%20LA%402x.png",
+      "Images/National%20Pen%20Company%20%28Pens.com%29%402x.png",
+      "Images/North%20Atlantic%20Imports%20LLC%20DBA%20Blackstone%20Products%402x.png",
+      "Images/Our%20Place%402x.png",
+      "Images/Owlet%20US%402x.png",
+      "Images/PatientPoint%402x.png",
+      "Images/Plastic%20Bank%402x.png",
+      "Images/Plugable%20Technologies%402x.png",
+      "Images/Pon.bike%20Holding%402x.png",
+      "Images/Proclaim%20Health%402x.png",
+      "Images/Quirch%20Foods%402x.png",
+      "Images/r.e.m.%20Beauty%402x.png",
+      "Images/Rad%20Power%20Bikes%402x.png",
+      "Images/Raycon%20Global%402x.png",
+      "Images/RAZER%402x.png",
+      "Images/Reformation%402x.png",
+      "Images/Rhode%20Skin%402x.png",
+      "Images/Rove%20Concepts%402x.png",
+      "Images/Ruggable%402x.png",
+      "Images/Safilo%402x.png",
+      "Images/Silfab%20Solar%20%E2%80%93%20America%E2%80%99s%20Trusted%20Manufacturer%402x.png",
+      "Images/Skydio%402x.png",
+      "Images/Source86%402x.png",
+      "Images/Stio%402x.png",
+      "Images/Synopsys%402x.png",
+      "Images/ThirdLove%402x.png",
+      "Images/True%20Religion%402x.png",
+      "Images/Uniek%402x.png",
+      "Images/Valmont%402x.png",
+      "Images/Vusion%20Group%402x.png",
+      "Images/Wahl%20Clipper%20Corporation%402x.png",
+      "Images/Wahoo%20Fitness%402x.png",
+      "Images/Windsong%20Global%402x.png",
+      "Images/Zia%20Tile%402x.png",
+      "Images/Zipline%402x.png"
+    ];
+
+    /* ✅ Grid Settings */
+    const columns = 20;
+    const rows = 10;
+    const totalSlots = columns * rows;
+
+    function applyContent(div) {
+      div.innerHTML = "";
+      const chance = Math.random();
+
+      if (chance < 0.85) {  // 85% chance logos
+        const img = document.createElement("img");
+        img.src = logoUrls[Math.floor(Math.random() * logoUrls.length)];
+        div.appendChild(img);
+      } else {              // 15% chance industry image(s)
+        const img = document.createElement("img");
+        img.src = industryImages[Math.floor(Math.random() * industryImages.length)];
+        div.appendChild(img);
+      }
+    }
+
+    function createLogoSlot(i) {
+      const div = document.createElement("div");
+      div.className = "logo";
+      applyContent(div);
+
+      const col = (i % columns) + 1;
+      const row = Math.floor(i / columns) + 1;
+
+      if (col >= 7 && col <= 14 && row >= 5 && row <= 6) return;
+
+      screen.appendChild(div);
+      setTimeout(() => fadeIn(div), i * 30);
+    }
+
+    function fadeIn(div) {
+      div.style.opacity = 1;
+      setInterval(() => replaceLogo(div), 15000 + Math.random() * 10000);
+    }
+
+    function replaceLogo(div) {
+      div.style.opacity = 0;
+      setTimeout(() => {
+        applyContent(div);
+        div.style.opacity = 1;
+      }, 1500);
+    }
+
+    /* ✅ Build grid */
+    for (let i = 0; i < totalSlots; i++) {
+      createLogoSlot(i);
+    }
+  </script>
 </body>
 </html>
