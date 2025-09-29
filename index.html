@@ -10,7 +10,6 @@
   <link rel="preload" href="Fonts/GT-America-Standard-Medium.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
-    /* Custom fonts */
     @font-face {
       font-family: 'Antenna-BlackItalic';
       src: url('Fonts/Antenna-BlackItalic.woff2') format('woff2'),
@@ -30,14 +29,15 @@
 
     body {
       margin: 0;
-      overflow: hidden;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      overflow: hidden;
       background: linear-gradient(to bottom, #31B8E9, #F7BEA8);
       font-family: 'GT-America-Standard-Medium', sans-serif;
     }
+
     .screen {
       width: 1728px;
       height: 960px;
@@ -45,26 +45,27 @@
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
       gap: 4px;
-      box-sizing: border-box;
       position: relative;
+      box-sizing: border-box;
     }
+
     .logo {
       width: 100%;
       height: 100%;
       opacity: 0;
       transition: opacity 1.5s ease;
-      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent; /* No gray — shows gradient background */
+      background: transparent; /* show gradient through behind */
     }
+
     .logo img {
       width: 90%;
       height: 90%;
       object-fit: contain;
-      border-radius: 4px;
     }
+
     .center-message {
       grid-column: 7 / span 8;
       grid-row: 5 / span 2;
@@ -76,8 +77,8 @@
       font-weight: 900;
       font-style: italic;
       text-align: center;
-      color: #052439; /* Dark blue */
-      text-transform: uppercase; /* ✅ ALL CAPS */
+      color: #052439; /* dark blue headline */
+      text-transform: uppercase; /* all caps */
     }
   </style>
 </head>
@@ -91,29 +92,83 @@
   <script>
     const screen = document.getElementById("screen");
 
-    // Example logos - please rename and adjust
+    // ✅ Logos in /Images (renamed neatly, no spaces/symbols!)
     const logoUrls = [
-      "images/ald.png",
-      "images/asus.png",
-      "images/lululemon.png",
-      "images/bombas.png",
-      "images/beautylish.png"
-      // Add all your cleaned filenames here
-    ];
-
-    const industryImages = [
-      "https://www.thecooperativelogisticsnetwork.com/blog/wp-content/uploads/2022/06/short-sea-shipping.jpg"
+      "Images/ALD.png",
+      "Images/ASUS.png",
+      "Images/ATDLogo.png",
+      "Images/BathingBrands.png",
+      "Images/beautylish.png",
+      "Images/BelleBrandsFullLogo.png",
+      "Images/BeyondYoga.png",
+      "Images/BlackDiamondEquipment.png",
+      "Images/Bombas.png",
+      "Images/Boxbollen.png",
+      "Images/CarCovers.com.png",
+      "Images/ClarkCoreServices.png",
+      "Images/Coulisse.png",
+      "Images/CozyEarth.png",
+      "Images/CSafeGlobal.png",
+      "Images/Cuyana.png",
+      "Images/Figs.png",
+      "Images/FreeportMcMoran.png",
+      "Images/HALFDAYSAPPAREL.png",
+      "Images/HiabFinlandOy.png",
+      "Images/HonestCompany.png",
+      "Images/JLab.png",
+      "Images/KateSomerville.png",
+      "Images/Laughland.png",
+      "Images/Lovevery.png",
+      "Images/Lululemon.png",
+      "Images/MadeIn.png",
+      "Images/MaticRobots.png",
+      "Images/MetropolitanHardwood.png",
+      "Images/MeUndies.png",
+      "Images/MilaniCosmetics.png",
+      "Images/MizzenMain.png",
+      "Images/MNMLLA.png",
+      "Images/NationalPens.png",
+      "Images/NorthAImports.png",
+      "Images/OurPlace.png",
+      "Images/OwletUS.png",
+      "Images/PatientPoint.png",
+      "Images/PlasticBank.png",
+      "Images/PlugableTechnologies.png",
+      "Images/PonbikeHolding.png",
+      "Images/ProclaimHealth.png",
+      "Images/QuirchFoods.png",
+      "Images/RadPowerBikes.png",
+      "Images/RayconGlobal.png",
+      "Images/RAZER.png",
+      "Images/Reformation.png",
+      "Images/remBeauty.png",
+      "Images/RhodeSkin.png",
+      "Images/RoveConcepts.png",
+      "Images/Ruggable.png",
+      "Images/Safilo.png",
+      "Images/Silfab.png",
+      "Images/Skydio.png",
+      "Images/Source86.png",
+      "Images/Stio.png",
+      "Images/Synopsys.png",
+      "Images/ThirdLove.png",
+      "Images/TrueReligion.png",
+      "Images/Uniek.png",
+      "Images/Valmont.png",
+      "Images/VusionGroup.png",
+      "Images/Wahl.png",
+      "Images/WahooFitness.png",
+      "Images/WindsongGlobal.png",
+      "Images/ZiaTile.png",
+      "Images/Zipline.png"
     ];
 
     const columns = 20, rows = 10, totalSlots = columns * rows;
 
     function applyContent(div) {
       div.innerHTML = "";
-      const chance = Math.random();
       const img = document.createElement("img");
-      img.src = (chance < 0.9)
-        ? logoUrls[Math.floor(Math.random()*logoUrls.length)]
-        : industryImages[Math.floor(Math.random()*industryImages.length)];
+      img.src = logoUrls[Math.floor(Math.random() * logoUrls.length)];
       div.appendChild(img);
     }
 
@@ -123,7 +178,7 @@
       applyContent(div);
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
-      if (col >= 7 && col <= 14 && row >= 5 && row <= 6) return; // Skip center for text
+      if (col >= 7 && col <= 14 && row >= 5 && row <= 6) return;
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div), i*30);
     }
