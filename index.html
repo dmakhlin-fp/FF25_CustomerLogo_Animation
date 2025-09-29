@@ -10,6 +10,7 @@
   <link rel="preload" href="Fonts/GT-America-Standard-Medium.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
+    /* Custom fonts */
     @font-face {
       font-family: 'Antenna-BlackItalic';
       src: url('Fonts/Antenna-BlackItalic.woff2') format('woff2'),
@@ -57,7 +58,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent; /* show gradient through behind */
+      background: transparent;
     }
 
     .logo img {
@@ -70,6 +71,7 @@
       grid-column: 7 / span 8;
       grid-row: 5 / span 2;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-size: 72px;
@@ -77,22 +79,24 @@
       font-weight: 900;
       font-style: italic;
       text-align: center;
-      color: #052439; /* dark blue headline */
-      text-transform: uppercase; /* all caps */
+      color: #052439;
+      text-transform: uppercase;
+      line-height: 1.1; /* tighter line spacing */
     }
   </style>
 </head>
 <body>
   <div class="screen" id="screen">
     <div class="center-message">
-      THANK YOU TO ALL OF OUR CUSTOMERS
+      THANK YOU<br>
+      TO ALL OF OUR CUSTOMERS
     </div>
   </div>
 
   <script>
     const screen = document.getElementById("screen");
 
-    // ✅ Logos in /Images (renamed neatly, no spaces/symbols!)
+    // ✅ Logos from /Images folder (with cleaned filenames)
     const logoUrls = [
       "Images/ALD.png",
       "Images/ASUS.png",
@@ -176,9 +180,13 @@
       const div = document.createElement("div");
       div.className = "logo";
       applyContent(div);
+
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
+
+      // Skip reserved area for message
       if (col >= 7 && col <= 14 && row >= 5 && row <= 6) return;
+
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div), i*30);
     }
@@ -196,6 +204,7 @@
       }, 1500);
     }
 
+    // Initialize grid
     for (let i=0; i<totalSlots; i++){ createLogoSlot(i); }
   </script>
 </body>
