@@ -47,7 +47,6 @@
       gap: 4px;
       box-sizing: border-box;
       position: relative;
-      color: black;
     }
     .logo {
       width: 100%;
@@ -58,7 +57,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: transparent; /* transparent over gradient */
+      background: transparent; /* No gray — shows gradient background */
     }
     .logo img {
       width: 90%;
@@ -73,30 +72,33 @@
       justify-content: center;
       align-items: center;
       font-size: 72px;
-      font-family: 'Antenna-BlackItalic', sans-serif; /* ✅ Using Antenna font */
+      font-family: 'Antenna-BlackItalic', sans-serif;
       font-weight: 900;
       font-style: italic;
       text-align: center;
-      color: #052439; /* ✅ Clean dark blue text */
+      color: #052439; /* Dark blue */
+      text-transform: uppercase; /* ✅ ALL CAPS */
     }
   </style>
 </head>
 <body>
   <div class="screen" id="screen">
     <div class="center-message">
-      Thank You to all of our Customers
+      THANK YOU TO ALL OF OUR CUSTOMERS
     </div>
   </div>
 
   <script>
     const screen = document.getElementById("screen");
 
-    // Example: add all your filenames from /Images
+    // Example logos - please rename and adjust
     const logoUrls = [
-      "Images/Lululemon.png",
-      "Images/Asus.png",
-      "Images/Bombas.png"
-      // ...add the full list of your files here
+      "images/ald.png",
+      "images/asus.png",
+      "images/lululemon.png",
+      "images/bombas.png",
+      "images/beautylish.png"
+      // Add all your cleaned filenames here
     ];
 
     const industryImages = [
@@ -109,7 +111,7 @@
       div.innerHTML = "";
       const chance = Math.random();
       const img = document.createElement("img");
-      img.src = (chance < 0.85)
+      img.src = (chance < 0.9)
         ? logoUrls[Math.floor(Math.random()*logoUrls.length)]
         : industryImages[Math.floor(Math.random()*industryImages.length)];
       div.appendChild(img);
@@ -121,7 +123,7 @@
       applyContent(div);
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
-      if (col >= 7 && col <= 14 && row >= 5 && row <= 6) return;
+      if (col >= 7 && col <= 14 && row >= 5 && row <= 6) return; // Skip center for text
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div), i*30);
     }
@@ -136,7 +138,7 @@
       setTimeout(()=>{
         applyContent(div);
         div.style.opacity = 1;
-      },1500);
+      }, 1500);
     }
 
     for (let i=0; i<totalSlots; i++){ createLogoSlot(i); }
