@@ -44,7 +44,8 @@
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      gap: 12px; /* ✅ more space between logo cells */
+      row-gap: 16px;       /* ✅ Controlled vertical spacing */
+      column-gap: 32px;    /* ✅ Controlled horizontal spacing */
       box-sizing: border-box;
       position: relative;
     }
@@ -67,8 +68,8 @@
     }
 
     .center-message {
-      grid-column: 6 / span 10; /* reserve wider space horizontally */
-      grid-row: 4 / span 4;     /* reserve taller space vertically */
+      grid-column: 6 / span 10; /* Reserve block in center */
+      grid-row: 4 / span 4;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -78,19 +79,21 @@
       font-style: italic;
       color: #052439;
       text-transform: uppercase;
-      line-height: 1.2;
       text-align: center;
+      line-height: 1.2;
     }
+
     .center-message .line1 {
-      font-size: 110px;
+      font-size: 110px;  /* larger top line */
     }
     .center-message .line2 {
-      font-size: 72px;
+      font-size: 72px;   /* smaller bottom line */
     }
   </style>
 </head>
 <body>
   <div class="screen" id="screen">
+    <!-- Message with two locked lines -->
     <div class="center-message">
       <span class="line1">THANK YOU</span>
       <span class="line2">TO ALL OF OUR CUSTOMERS</span>
@@ -100,6 +103,7 @@
   <script>
     const screen = document.getElementById("screen");
 
+    // ✅ Logo file names from /Images folder
     const logoUrls = [
       "Images/ALD.png","Images/ASUS.png","Images/ATDLogo.png","Images/BathingBrands.png",
       "Images/beautylish.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png",
@@ -133,10 +137,11 @@
     function createLogoSlot(i) {
       const div = document.createElement("div");
       div.className = "logo";
+
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
 
-      // ✅ Skip reserved space for message
+      // ✅ Skip reserved space for the message
       if (col >= 6 && col <= 15 && row >= 4 && row <= 7) return;
 
       applyContent(div);
@@ -157,6 +162,7 @@
       }, 1500);
     }
 
+    // Build grid
     for (let i=0; i<totalSlots; i++){ createLogoSlot(i); }
   </script>
 </body>
