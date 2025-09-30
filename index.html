@@ -44,8 +44,8 @@
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      row-gap: 12px;       /* slightly smaller gap = bigger logos */
-      column-gap: 20px;    /* even spacing but tighter */
+      row-gap: 12px;
+      column-gap: 20px;
       box-sizing: border-box;
       position: relative;
     }
@@ -68,10 +68,9 @@
     }
 
     .center-message {
-      grid-column: 7 / span 8; /* reserve smaller text block */
-      grid-row: 4 / span 3;    /* tighter height */
+      grid-column: 6 / span 10;
+      grid-row: 4 / span 3;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: 'Antenna-BlackItalic', sans-serif;
@@ -80,23 +79,14 @@
       color: #052439;
       text-transform: uppercase;
       text-align: center;
+      font-size: 120px; /* Larger single-line headline */
       line-height: 1.1;
-    }
-
-    .center-message .line1 {
-      font-size: 90px;   /* reduced for balance */
-    }
-    .center-message .line2 {
-      font-size: 60px;   /* slightly smaller subline */
     }
   </style>
 </head>
 <body>
   <div class="screen" id="screen">
-    <div class="center-message">
-      <span class="line1">THANK YOU</span>
-      <span class="line2">TO ALL OF OUR CUSTOMERS</span>
-    </div>
+    <div class="center-message">THANK YOU</div>
   </div>
 
   <script>
@@ -132,7 +122,7 @@
       for (let attempt = 0; attempt < retries; attempt++) {
         newSrc = logoUrls[Math.floor(Math.random() * logoUrls.length)];
         let duplicate = false;
-        // neighbor checks
+        // check immediate neighbors
         if (grid[row] && grid[row][col-1] && grid[row][col-1].lastSrc === newSrc) duplicate = true;
         if (grid[row] && grid[row][col+1] && grid[row][col+1].lastSrc === newSrc) duplicate = true;
         if (grid[row-1] && grid[row-1][col] && grid[row-1][col].lastSrc === newSrc) duplicate = true;
@@ -152,8 +142,8 @@
       div.className = "logo";
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
-      // Skip reserved block for text
-      if (col >= 7 && col <= 14 && row >= 4 && row <= 6) return;
+      // Skip reserved text area
+      if (col >= 6 && col <= 15 && row >= 4 && row <= 6) return;
       applyContent(div, col, row);
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div, col, row), i*30);
