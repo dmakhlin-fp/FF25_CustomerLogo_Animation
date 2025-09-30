@@ -69,7 +69,7 @@
 
     .center-message {
       grid-column: 6 / span 10;
-      grid-row: 4 / span 3;
+      grid-row: 5 / span 2;  /* ✅ only 2 rows tall now */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -79,8 +79,8 @@
       color: #052439;
       text-transform: uppercase;
       text-align: center;
-      font-size: 120px; /* Larger single-line headline */
-      line-height: 1.1;
+      font-size: 110px;  /* fills most of new 2-row high box */
+      line-height: 1.0;  /* tighter spacing inside text */
     }
   </style>
 </head>
@@ -122,7 +122,6 @@
       for (let attempt = 0; attempt < retries; attempt++) {
         newSrc = logoUrls[Math.floor(Math.random() * logoUrls.length)];
         let duplicate = false;
-        // check immediate neighbors
         if (grid[row] && grid[row][col-1] && grid[row][col-1].lastSrc === newSrc) duplicate = true;
         if (grid[row] && grid[row][col+1] && grid[row][col+1].lastSrc === newSrc) duplicate = true;
         if (grid[row-1] && grid[row-1][col] && grid[row-1][col].lastSrc === newSrc) duplicate = true;
@@ -142,8 +141,8 @@
       div.className = "logo";
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
-      // Skip reserved text area
-      if (col >= 6 && col <= 15 && row >= 4 && row <= 6) return;
+      // ✅ Skip reserved text area
+      if (col >= 6 && col <= 15 && row >= 5 && row <= 6) return;
       applyContent(div, col, row);
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div, col, row), i*30);
