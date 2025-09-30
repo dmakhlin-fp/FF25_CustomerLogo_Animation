@@ -44,8 +44,8 @@
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      row-gap: 16px;       /* vertical spacing */
-      column-gap: 32px;    /* horizontal spacing */
+      row-gap: 12px;       /* slightly smaller gap = bigger logos */
+      column-gap: 20px;    /* even spacing but tighter */
       box-sizing: border-box;
       position: relative;
     }
@@ -68,8 +68,8 @@
     }
 
     .center-message {
-      grid-column: 6 / span 10; /* reserve center */
-      grid-row: 4 / span 4;
+      grid-column: 7 / span 8; /* reserve smaller text block */
+      grid-row: 4 / span 3;    /* tighter height */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -80,14 +80,14 @@
       color: #052439;
       text-transform: uppercase;
       text-align: center;
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
     .center-message .line1 {
-      font-size: 110px;
+      font-size: 90px;   /* reduced for balance */
     }
     .center-message .line2 {
-      font-size: 72px;
+      font-size: 60px;   /* slightly smaller subline */
     }
   </style>
 </head>
@@ -102,7 +102,6 @@
   <script>
     const screen = document.getElementById("screen");
 
-    // ✅ Your logos (clean names in /Images)
     const logoUrls = [
       "Images/ALD.png","Images/ASUS.png","Images/ATDLogo.png","Images/BathingBrands.png",
       "Images/beautylish.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png",
@@ -125,27 +124,21 @@
     ];
 
     const columns = 20, rows = 10, totalSlots = columns * rows;
-
-    // 2D grid to store references for duplicate check
     const grid = Array.from({length: rows+2}, () => Array(columns+2).fill(null));
 
     function applyContent(div, col, row) {
       let newSrc;
       const retries = 10;
-
       for (let attempt = 0; attempt < retries; attempt++) {
         newSrc = logoUrls[Math.floor(Math.random() * logoUrls.length)];
         let duplicate = false;
-
-        // Check neighbors (left, right, up, down)
+        // neighbor checks
         if (grid[row] && grid[row][col-1] && grid[row][col-1].lastSrc === newSrc) duplicate = true;
         if (grid[row] && grid[row][col+1] && grid[row][col+1].lastSrc === newSrc) duplicate = true;
         if (grid[row-1] && grid[row-1][col] && grid[row-1][col].lastSrc === newSrc) duplicate = true;
         if (grid[row+1] && grid[row+1][col] && grid[row+1][col].lastSrc === newSrc) duplicate = true;
-
         if (!duplicate) break;
       }
-
       div.innerHTML = "";
       const img = document.createElement("img");
       img.src = newSrc;
@@ -157,13 +150,10 @@
     function createLogoSlot(i) {
       const div = document.createElement("div");
       div.className = "logo";
-
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
-
-      // Skip reserved message area
-      if (col >= 6 && col <= 15 && row >= 4 && row <= 7) return;
-
+      // Skip reserved block for text
+      if (col >= 7 && col <= 14 && row >= 4 && row <= 6) return;
       applyContent(div, col, row);
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div, col, row), i*30);
@@ -182,7 +172,6 @@
       }, 1500);
     }
 
-    // Build full grid
     for (let i=0; i<totalSlots; i++){ createLogoSlot(i); }
   </script>
 </body>
