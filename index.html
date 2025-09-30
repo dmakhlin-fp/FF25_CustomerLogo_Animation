@@ -44,8 +44,8 @@
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      row-gap: 16px;       /* EVEN spacing between rows */
-      column-gap: 16px;    /* EVEN spacing between columns */
+      row-gap: 16px;       
+      column-gap: 16px;    
       box-sizing: border-box;
       position: relative;
     }
@@ -68,30 +68,26 @@
     }
 
     .center-message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      grid-column: 6 / span 10; /* reserved center area */
+      grid-row: 5 / span 2;     /* only 2 rows tall */
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-family: 'Antenna-BlackItalic', sans-serif;
       font-weight: 900;
       font-style: italic;
       color: #052439;
       text-transform: uppercase;
       text-align: center;
-      font-size: 110px;
+      font-size: 100px;  /* fits neatly into reserved 2 rows */
       line-height: 1;
-      background: transparent;
-
-      /* 🔥 Spacing around text = same as grid gap */
-      padding: 16px 24px;  /* match row-gap/column-gap visually */
-      background-color: white; /* Optional: solid/opaque text box for readability */
-      border-radius: 8px;  /* Optional soften edges */
     }
   </style>
 </head>
 <body>
-  <div class="screen" id="screen"></div>
-  <div class="center-message">THANK YOU</div>
+  <div class="screen" id="screen">
+    <div class="center-message">THANK YOU</div>
+  </div>
 
   <script>
     const screen = document.getElementById("screen");
@@ -145,6 +141,10 @@
       div.className = "logo";
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
+
+      // ✅ Skip reserved message area
+      if (col >= 6 && col <= 15 && row >= 5 && row <= 6) return;
+
       applyContent(div, col, row);
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div, col, row), i*30);
@@ -163,6 +163,7 @@
       }, 1500);
     }
 
+    // Build logos
     for (let i=0; i<totalSlots; i++){ createLogoSlot(i); }
   </script>
 </body>
