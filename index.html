@@ -44,8 +44,8 @@
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      row-gap: 12px;
-      column-gap: 20px;
+      row-gap: 16px;       /* EVEN spacing between rows */
+      column-gap: 16px;    /* EVEN spacing between columns */
       box-sizing: border-box;
       position: relative;
     }
@@ -68,26 +68,30 @@
     }
 
     .center-message {
-      grid-column: 6 / span 10;
-      grid-row: 5 / span 2;  /* ✅ only 2 rows tall now */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-family: 'Antenna-BlackItalic', sans-serif;
       font-weight: 900;
       font-style: italic;
       color: #052439;
       text-transform: uppercase;
       text-align: center;
-      font-size: 110px;  /* fills most of new 2-row high box */
-      line-height: 1.0;  /* tighter spacing inside text */
+      font-size: 110px;
+      line-height: 1;
+      background: transparent;
+
+      /* 🔥 Spacing around text = same as grid gap */
+      padding: 16px 24px;  /* match row-gap/column-gap visually */
+      background-color: white; /* Optional: solid/opaque text box for readability */
+      border-radius: 8px;  /* Optional soften edges */
     }
   </style>
 </head>
 <body>
-  <div class="screen" id="screen">
-    <div class="center-message">THANK YOU</div>
-  </div>
+  <div class="screen" id="screen"></div>
+  <div class="center-message">THANK YOU</div>
 
   <script>
     const screen = document.getElementById("screen");
@@ -141,8 +145,6 @@
       div.className = "logo";
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
-      // ✅ Skip reserved text area
-      if (col >= 6 && col <= 15 && row >= 5 && row <= 6) return;
       applyContent(div, col, row);
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div, col, row), i*30);
