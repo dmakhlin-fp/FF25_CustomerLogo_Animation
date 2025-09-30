@@ -38,17 +38,15 @@
       font-family: 'GT-America-Standard-Medium', sans-serif;
     }
 
-    /* Full grid of logos */
     .screen {
       width: 1728px;
       height: 960px;
       display: grid;
       grid-template-columns: repeat(20, 1fr);
       grid-template-rows: repeat(10, 1fr);
-      gap: 4px;
+      gap: 12px; /* ✅ more space between logo cells */
       box-sizing: border-box;
       position: relative;
-      z-index: 1;
     }
 
     .logo {
@@ -68,32 +66,23 @@
       object-fit: contain;
     }
 
-    /* Overlay message */
     .center-message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
+      grid-column: 6 / span 10; /* reserve wider space horizontally */
+      grid-row: 4 / span 4;     /* reserve taller space vertically */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       font-family: 'Antenna-BlackItalic', sans-serif;
       font-weight: 900;
       font-style: italic;
       color: #052439;
       text-transform: uppercase;
-      line-height: 1.1;
-      z-index: 5;
-
-      display: flex;
-      flex-direction: column; /* stack lines */
-      gap: 25px;              /* spacing between lines */
+      line-height: 1.2;
+      text-align: center;
     }
-
-    .center-message span {
-      white-space: nowrap;   /* ✅ each span forced on one line */
-    }
-
     .center-message .line1 {
-      font-size: 110px;      /* slightly larger */
+      font-size: 110px;
     }
     .center-message .line2 {
       font-size: 72px;
@@ -101,11 +90,11 @@
   </style>
 </head>
 <body>
-  <div class="screen" id="screen"></div>
-
-  <div class="center-message">
-    <span class="line1">THANK YOU</span>
-    <span class="line2">TO ALL OF OUR CUSTOMERS</span>
+  <div class="screen" id="screen">
+    <div class="center-message">
+      <span class="line1">THANK YOU</span>
+      <span class="line2">TO ALL OF OUR CUSTOMERS</span>
+    </div>
   </div>
 
   <script>
@@ -144,6 +133,12 @@
     function createLogoSlot(i) {
       const div = document.createElement("div");
       div.className = "logo";
+      const col = (i % columns) + 1;
+      const row = Math.floor(i / columns) + 1;
+
+      // ✅ Skip reserved space for message
+      if (col >= 6 && col <= 15 && row >= 4 && row <= 7) return;
+
       applyContent(div);
       screen.appendChild(div);
       setTimeout(()=>fadeIn(div), i*30);
