@@ -63,8 +63,8 @@
     }
 
     .logo img {
-      width: 100%;   /* fill cell */
-      height: 100%;  /* fill cell */
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
@@ -75,18 +75,28 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      font-size: 90px;
       font-family: 'Antenna-BlackItalic', sans-serif;
       font-weight: 900;
       font-style: italic;
       color: #052439;
       text-transform: uppercase;
-      line-height: 1.2;    /* Controls space between the two lines */
-      padding: 40px 60px;  /* Spacing around text */
-      background: rgba(255,255,255,0.6); /* optional: faint backdrop to improve readability */
-      border-radius: 12px; /* soften edges */
+      line-height: 1.1;
       z-index: 5;
-      white-space: normal; /* ✅ ensures <br> works! */
+
+      display: flex;
+      flex-direction: column; /* stack lines */
+      gap: 25px;              /* spacing between lines */
+    }
+
+    .center-message span {
+      white-space: nowrap;   /* ✅ each span forced on one line */
+    }
+
+    .center-message .line1 {
+      font-size: 110px;      /* slightly larger */
+    }
+    .center-message .line2 {
+      font-size: 72px;
     }
   </style>
 </head>
@@ -94,81 +104,32 @@
   <div class="screen" id="screen"></div>
 
   <div class="center-message">
-    THANK YOU<br>
-    TO ALL OF OUR CUSTOMERS
+    <span class="line1">THANK YOU</span>
+    <span class="line2">TO ALL OF OUR CUSTOMERS</span>
   </div>
 
   <script>
     const screen = document.getElementById("screen");
 
     const logoUrls = [
-      "Images/ALD.png",
-      "Images/ASUS.png",
-      "Images/ATDLogo.png",
-      "Images/BathingBrands.png",
-      "Images/beautylish.png",
-      "Images/BelleBrandsFullLogo.png",
-      "Images/BeyondYoga.png",
-      "Images/BlackDiamondEquipment.png",
-      "Images/Bombas.png",
-      "Images/Boxbollen.png",
-      "Images/CarCovers.com.png",
-      "Images/ClarkCoreServices.png",
-      "Images/Coulisse.png",
-      "Images/CozyEarth.png",
-      "Images/CSafeGlobal.png",
-      "Images/Cuyana.png",
-      "Images/Figs.png",
-      "Images/FreeportMcMoran.png",
-      "Images/HALFDAYSAPPAREL.png",
-      "Images/HiabFinlandOy.png",
-      "Images/HonestCompany.png",
-      "Images/JLab.png",
-      "Images/KateSomerville.png",
-      "Images/Laughland.png",
-      "Images/Lovevery.png",
-      "Images/Lululemon.png",
-      "Images/MadeIn.png",
-      "Images/MaticRobots.png",
-      "Images/MetropolitanHardwood.png",
-      "Images/MeUndies.png",
-      "Images/MilaniCosmetics.png",
-      "Images/MizzenMain.png",
-      "Images/MNMLLA.png",
-      "Images/NationalPens.png",
-      "Images/NorthAImports.png",
-      "Images/OurPlace.png",
-      "Images/OwletUS.png",
-      "Images/PatientPoint.png",
-      "Images/PlasticBank.png",
-      "Images/PlugableTechnologies.png",
-      "Images/PonbikeHolding.png",
-      "Images/ProclaimHealth.png",
-      "Images/QuirchFoods.png",
-      "Images/RadPowerBikes.png",
-      "Images/RayconGlobal.png",
-      "Images/RAZER.png",
-      "Images/Reformation.png",
-      "Images/remBeauty.png",
-      "Images/RhodeSkin.png",
-      "Images/RoveConcepts.png",
-      "Images/Ruggable.png",
-      "Images/Safilo.png",
-      "Images/Silfab.png",
-      "Images/Skydio.png",
-      "Images/Source86.png",
-      "Images/Stio.png",
-      "Images/Synopsys.png",
-      "Images/ThirdLove.png",
-      "Images/TrueReligion.png",
-      "Images/Uniek.png",
-      "Images/Valmont.png",
-      "Images/VusionGroup.png",
-      "Images/Wahl.png",
-      "Images/WahooFitness.png",
-      "Images/WindsongGlobal.png",
-      "Images/ZiaTile.png",
-      "Images/Zipline.png"
+      "Images/ALD.png","Images/ASUS.png","Images/ATDLogo.png","Images/BathingBrands.png",
+      "Images/beautylish.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png",
+      "Images/BlackDiamondEquipment.png","Images/Bombas.png","Images/Boxbollen.png",
+      "Images/CarCovers.com.png","Images/ClarkCoreServices.png","Images/Coulisse.png",
+      "Images/CozyEarth.png","Images/CSafeGlobal.png","Images/Cuyana.png","Images/Figs.png",
+      "Images/FreeportMcMoran.png","Images/HALFDAYSAPPAREL.png","Images/HiabFinlandOy.png",
+      "Images/HonestCompany.png","Images/JLab.png","Images/KateSomerville.png","Images/Laughland.png",
+      "Images/Lovevery.png","Images/Lululemon.png","Images/MadeIn.png","Images/MaticRobots.png",
+      "Images/MetropolitanHardwood.png","Images/MeUndies.png","Images/MilaniCosmetics.png",
+      "Images/MizzenMain.png","Images/MNMLLA.png","Images/NationalPens.png","Images/NorthAImports.png",
+      "Images/OurPlace.png","Images/OwletUS.png","Images/PatientPoint.png","Images/PlasticBank.png",
+      "Images/PlugableTechnologies.png","Images/PonbikeHolding.png","Images/ProclaimHealth.png",
+      "Images/QuirchFoods.png","Images/RadPowerBikes.png","Images/RayconGlobal.png","Images/RAZER.png",
+      "Images/Reformation.png","Images/remBeauty.png","Images/RhodeSkin.png","Images/RoveConcepts.png",
+      "Images/Ruggable.png","Images/Safilo.png","Images/Silfab.png","Images/Skydio.png","Images/Source86.png",
+      "Images/Stio.png","Images/Synopsys.png","Images/ThirdLove.png","Images/TrueReligion.png","Images/Uniek.png",
+      "Images/Valmont.png","Images/VusionGroup.png","Images/Wahl.png","Images/WahooFitness.png",
+      "Images/WindsongGlobal.png","Images/ZiaTile.png","Images/Zipline.png"
     ];
 
     const columns = 20, rows = 10, totalSlots = columns * rows;
