@@ -62,8 +62,8 @@
     }
 
     .center-message {
-      grid-column: 5 / span 8;
-      grid-row: 3 / span 3;
+      grid-column: 6 / span 6; /* tighter central box */
+      grid-row: 3 / span 4;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -74,16 +74,18 @@
       text-transform: uppercase;
       text-align: center;
       line-height: 1.1;
+      padding: 32px; /* ✅ breathing room matches logo gaps */
     }
     .center-message span {
-      display:block;   /* ✅ force each one to its own line */
-      white-space:nowrap; /* ✅ prevent wrapping inside the line */
+      display:block; 
+      white-space:nowrap;
     }
     .center-message .line1 {
-      font-size: 70px;
+      font-size: 60px;   /* smaller for balance */
+      margin-bottom: 20px;
     }
     .center-message .line2 {
-      font-size: 120px;
+      font-size: 110px;  /* TOGETHER stays bold and strong */
     }
   </style>
 </head>
@@ -148,7 +150,7 @@
       const row = Math.floor(i / columns) + 1;
 
       // Reserve central block for headline
-      if (col >= 5 && col <= 12 && row >= 3 && row <= 5) return;
+      if (col >= 6 && col <= 11 && row >= 3 && row <= 6) return;
 
       applyContent(div,col,row);
       screen.appendChild(div);
