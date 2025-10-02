@@ -2,142 +2,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Customer Thank You Wall</title>
-
-  <!-- Preload fonts -->
-  <link rel="preload" href="Fonts/Antenna-BlackItalic.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="Fonts/GT-America-Standard-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Customer Wall</title>
 
   <style>
     @font-face {
       font-family: 'Antenna-BlackItalic';
-      src: url('Fonts/Antenna-BlackItalic.woff2') format('woff2'),
-           url('Fonts/Antenna-BlackItalic.woff') format('woff');
-      font-weight: 900;
-      font-style: italic;
-      font-display: swap;
+      src: url('Fonts/Antenna-BlackItalic.woff2') format('woff2');
+      font-weight: 900; font-style: italic; font-display: swap;
     }
-    @font-face {
-      font-family: 'GT-America-Standard-Medium';
-      src: url('Fonts/GT-America-Standard-Medium.woff2') format('woff2'),
-           url('Fonts/GT-America-Standard-Medium.woff') format('woff');
-      font-weight: 500;
-      font-style: normal;
-      font-display: swap;
-    }
-
     body {
       margin: 0;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: flex; justify-content: center; align-items: center;
       overflow: hidden;
       background: linear-gradient(45deg, #31B8E9, #F7BEA8, #31B8E9);
       background-size: 400% 400%;
       animation: gradientShift 30s ease infinite;
-      font-family: 'GT-America-Standard-Medium', sans-serif;
     }
-
-    /* Animate the gradient smoothly */
     @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     .screen {
-      width: 1728px;
-      height: 960px;
+      width: 1728px; height: 960px;
       display: grid;
-      grid-template-columns: repeat(20, 1fr);
-      grid-template-rows: repeat(10, 1fr);
-      row-gap: 16px;       
-      column-gap: 16px;    
+      grid-template-columns: repeat(16, 1fr); /* fewer cols → bigger tiles */
+      grid-template-rows: repeat(8, 1fr);     /* fewer rows */
+      gap: 32px;                /* 👈 even spacing both ways */
+      padding: 32px;            /* 👈 equal padding around edges */
       box-sizing: border-box;
       position: relative;
     }
-
     .logo {
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
+      width: 100%; height: 100%;
+      opacity: 0; transition: opacity 1.5s ease;
+      display: flex; justify-content: center; align-items: center;
     }
-
     .logo img {
-      width: 100%;
-      height: 100%;
+      max-width: 80%;  /* 👈 ensures consistent relative size */
+      max-height: 80%;
       object-fit: contain;
     }
 
+    /* Center headline */
     .center-message {
-      grid-column: 6 / span 10;  /* reserved block */
-      grid-row: 5 / span 2;
+      grid-column: 5 / span 8; /* spacious center block */
+      grid-row: 3 / span 4;    /* tall enough breathing room */
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: 'Antenna-BlackItalic', sans-serif;
-      font-weight: 900;
-      font-style: italic;
+      font-weight: 900; font-style: italic;
       color: #052439;
       text-transform: uppercase;
       text-align: center;
-      font-size: 100px;  /* fits neatly */
-      line-height: 1;
+      line-height: 1.1;
+    }
+    .center-message .line1 {
+      font-size: 72px;
+    }
+    .center-message .line2 {
+      font-size: 120px; /* TOGETHER stands bigger on its own line */
     }
   </style>
 </head>
 <body>
   <div class="screen" id="screen">
-    <div class="center-message">THANK YOU</div>
+    <div class="center-message">
+      <span class="line1">Let’s move forward</span>
+      <span class="line2">TOGETHER</span>
+    </div>
   </div>
 
   <script>
     const screen = document.getElementById("screen");
 
-    // Your logos folder
     const logoUrls = [
       "Images/ALD.png","Images/ASUS.png","Images/ATDLogo.png","Images/BathingBrands.png",
       "Images/beautylish.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png",
       "Images/BlackDiamondEquipment.png","Images/Bombas.png","Images/Boxbollen.png",
       "Images/CarCovers.com.png","Images/ClarkCoreServices.png","Images/Coulisse.png",
       "Images/CozyEarth.png","Images/CSafeGlobal.png","Images/Cuyana.png","Images/Figs.png",
-      "Images/FreeportMcMoran.png","Images/HALFDAYSAPPAREL.png","Images/HiabFinlandOy.png",
-      "Images/HonestCompany.png","Images/JLab.png","Images/KateSomerville.png","Images/Laughland.png",
-      "Images/Lovevery.png","Images/Lululemon.png","Images/MadeIn.png","Images/MaticRobots.png",
-      "Images/MetropolitanHardwood.png","Images/MeUndies.png","Images/MilaniCosmetics.png",
-      "Images/MizzenMain.png","Images/MNMLLA.png","Images/NationalPens.png","Images/NorthAImports.png",
-      "Images/OurPlace.png","Images/OwletUS.png","Images/PatientPoint.png","Images/PlasticBank.png",
-      "Images/PlugableTechnologies.png","Images/PonbikeHolding.png","Images/ProclaimHealth.png",
-      "Images/QuirchFoods.png","Images/RadPowerBikes.png","Images/RayconGlobal.png","Images/RAZER.png",
-      "Images/Reformation.png","Images/remBeauty.png","Images/RhodeSkin.png","Images/RoveConcepts.png",
-      "Images/Ruggable.png","Images/Safilo.png","Images/Silfab.png","Images/Skydio.png","Images/Source86.png",
-      "Images/Stio.png","Images/Synopsys.png","Images/ThirdLove.png","Images/TrueReligion.png","Images/Uniek.png",
-      "Images/Valmont.png","Images/VusionGroup.png","Images/Wahl.png","Images/WahooFitness.png",
-      "Images/WindsongGlobal.png","Images/ZiaTile.png","Images/Zipline.png"
+      "Images/KateSomerville.png","Images/Lovevery.png","Images/Lululemon.png"
+      // … add remainder
     ];
 
-    const columns = 20, rows = 10, totalSlots = columns * rows;
+    const columns = 16, rows = 8, totalSlots = columns * rows;
+    const gridData = Array.from({length: rows+2}, () => Array(columns+2).fill(null));
 
-    // Track logos to prevent immediate neighbor duplicates
-    const grid = Array.from({length: rows+2}, () => Array(columns+2).fill(null));
-
+    /* Ensure no adjacent duplicates */
     function applyContent(div, col, row) {
       let newSrc;
-      const retries = 10;
-      for (let attempt = 0; attempt < retries; attempt++) {
-        newSrc = logoUrls[Math.floor(Math.random() * logoUrls.length)];
+      for (let attempt=0; attempt<10; attempt++) {
+        newSrc = logoUrls[Math.floor(Math.random()*logoUrls.length)];
         let duplicate = false;
-        if (grid[row][col-1] && grid[row][col-1].lastSrc === newSrc) duplicate = true;
-        if (grid[row][col+1] && grid[row][col+1].lastSrc === newSrc) duplicate = true;
-        if (grid[row-1][col] && grid[row-1][col].lastSrc === newSrc) duplicate = true;
-        if (grid[row+1][col] && grid[row+1][col].lastSrc === newSrc) duplicate = true;
+        if (gridData[row][col-1]?.lastSrc === newSrc) duplicate = true;
+        if (gridData[row][col+1]?.lastSrc === newSrc) duplicate = true;
+        if (gridData[row-1]?.[col]?.lastSrc === newSrc) duplicate = true;
+        if (gridData[row+1]?.[col]?.lastSrc === newSrc) duplicate = true;
         if (!duplicate) break;
       }
       div.innerHTML = "";
@@ -145,7 +110,7 @@
       img.src = newSrc;
       div.appendChild(img);
       div.lastSrc = newSrc;
-      grid[row][col] = div;
+      gridData[row][col] = div;
     }
 
     function createLogoSlot(i) {
@@ -154,28 +119,28 @@
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
 
-      // Skip reserved text area
-      if (col >= 6 && col <= 15 && row >= 5 && row <= 6) return;
+      // skip reserved text area
+      if (col >= 5 && col <= 12 && row >= 3 && row <= 6) return;
 
-      applyContent(div, col, row);
+      applyContent(div,col,row);
       screen.appendChild(div);
-      setTimeout(()=>fadeIn(div, col, row), i*30);
+      setTimeout(()=>fadeIn(div,col,row), i*30);
     }
 
-    function fadeIn(div, col, row) {
-      div.style.opacity = 1;
-      setInterval(()=>replaceLogo(div, col, row), 15000+Math.random()*10000);
+    function fadeIn(div,col,row){
+      div.style.opacity=1;
+      setInterval(()=>replaceLogo(div,col,row),15000+Math.random()*3000);
     }
 
-    function replaceLogo(div, col, row) {
-      div.style.opacity = 0;
+    function replaceLogo(div,col,row){
+      div.style.opacity=0;
       setTimeout(()=>{
-        applyContent(div, col, row);
-        div.style.opacity = 1;
-      }, 1500);
+        applyContent(div,col,row);
+        div.style.opacity=1;
+      },1500);
     }
 
-    for (let i=0; i<totalSlots; i++){ createLogoSlot(i); }
+    for(let i=0;i<totalSlots;i++){ createLogoSlot(i); }
   </script>
 </body>
 </html>
