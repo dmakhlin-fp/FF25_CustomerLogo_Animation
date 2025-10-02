@@ -4,21 +4,35 @@
   <meta charset="UTF-8" />
   <title>Customer Wall</title>
 
+  <!-- Preload fonts -->
+  <link rel="preload" href="Fonts/Antenna-BlackItalic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="Fonts/GT-America-Standard-Medium.woff2" as="font" type="font/woff2" crossorigin>
+
   <style>
     @font-face {
       font-family: 'Antenna-BlackItalic';
       src: url('Fonts/Antenna-BlackItalic.woff2') format('woff2');
       font-weight: 900; font-style: italic; font-display: swap;
     }
+    @font-face {
+      font-family: 'GT-America-Standard-Medium';
+      src: url('Fonts/GT-America-Standard-Medium.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+
     body {
       margin: 0;
       height: 100vh;
-      display: flex; justify-content: center; align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
       background: linear-gradient(45deg, #31B8E9, #F7BEA8, #31B8E9);
       background-size: 400% 400%;
       animation: gradientShift 30s ease infinite;
+      font-family: 'GT-America-Standard-Medium', sans-serif;
     }
+
     @keyframes gradientShift {
       0% {background-position: 0% 50%;}
       50% {background-position: 100% 50%;}
@@ -28,51 +42,55 @@
     .screen {
       width: 1728px; height: 960px;
       display: grid;
-      grid-template-columns: repeat(16, 1fr); /* fewer cols → bigger tiles */
-      grid-template-rows: repeat(8, 1fr);     /* fewer rows */
-      gap: 32px;                /* 👈 even spacing both ways */
-      padding: 32px;            /* 👈 equal padding around edges */
+      grid-template-columns: repeat(16, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 32px;      
+      padding: 32px;  
       box-sizing: border-box;
       position: relative;
     }
+
     .logo {
       width: 100%; height: 100%;
-      opacity: 0; transition: opacity 1.5s ease;
+      opacity: 0;
+      transition: opacity 1.5s ease;
       display: flex; justify-content: center; align-items: center;
     }
+
     .logo img {
-      max-width: 80%;  /* 👈 ensures consistent relative size */
+      max-width: 80%;
       max-height: 80%;
       object-fit: contain;
     }
 
-    /* Center headline */
+    /* Center message */
     .center-message {
-      grid-column: 5 / span 8; /* spacious center block */
-      grid-row: 3 / span 4;    /* tall enough breathing room */
+      grid-column: 4 / span 10; /* fairly wide block */
+      grid-row: 3 / span 3;    
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: 'Antenna-BlackItalic', sans-serif;
-      font-weight: 900; font-style: italic;
+      font-weight: 900;
+      font-style: italic;
       color: #052439;
       text-transform: uppercase;
       text-align: center;
       line-height: 1.1;
     }
     .center-message .line1 {
-      font-size: 72px;
+      font-size: 80px;  /* LET'S MOVE FORWARD */
     }
     .center-message .line2 {
-      font-size: 120px; /* TOGETHER stands bigger on its own line */
+      font-size: 140px; /* TOGETHER larger */
     }
   </style>
 </head>
 <body>
   <div class="screen" id="screen">
     <div class="center-message">
-      <span class="line1">Let’s move forward</span>
+      <span class="line1">LET’S MOVE FORWARD</span>
       <span class="line2">TOGETHER</span>
     </div>
   </div>
@@ -87,13 +105,12 @@
       "Images/CarCovers.com.png","Images/ClarkCoreServices.png","Images/Coulisse.png",
       "Images/CozyEarth.png","Images/CSafeGlobal.png","Images/Cuyana.png","Images/Figs.png",
       "Images/KateSomerville.png","Images/Lovevery.png","Images/Lululemon.png"
-      // … add remainder
+      // … add rest
     ];
 
     const columns = 16, rows = 8, totalSlots = columns * rows;
     const gridData = Array.from({length: rows+2}, () => Array(columns+2).fill(null));
 
-    /* Ensure no adjacent duplicates */
     function applyContent(div, col, row) {
       let newSrc;
       for (let attempt=0; attempt<10; attempt++) {
@@ -119,8 +136,8 @@
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
 
-      // skip reserved text area
-      if (col >= 5 && col <= 12 && row >= 3 && row <= 6) return;
+      // skip center block reserved for text
+      if (col >= 4 && col <= 13 && row >= 3 && row <= 5) return;
 
       applyContent(div,col,row);
       screen.appendChild(div);
