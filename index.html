@@ -62,8 +62,8 @@
     }
 
     .center-message {
-      grid-column: 6 / span 6; /* tighter central box */
-      grid-row: 3 / span 4;
+      grid-column: 5 / span 8;   /* central block, leaves 4 logo columns left and right */
+      grid-row: 4 / span 2;      /* only 2 rows tall → no giant top/bottom space */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -74,18 +74,17 @@
       text-transform: uppercase;
       text-align: center;
       line-height: 1.1;
-      padding: 32px; /* ✅ breathing room matches logo gaps */
     }
     .center-message span {
       display:block; 
       white-space:nowrap;
     }
     .center-message .line1 {
-      font-size: 60px;   /* smaller for balance */
-      margin-bottom: 20px;
+      font-size: 64px;   /* shrunk so it fits neatly in width */
+      margin-bottom: 16px;
     }
     .center-message .line2 {
-      font-size: 110px;  /* TOGETHER stays bold and strong */
+      font-size: 100px;  /* TOGETHER is larger focal point */
     }
   </style>
 </head>
@@ -149,8 +148,8 @@
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
 
-      // Reserve central block for headline
-      if (col >= 6 && col <= 11 && row >= 3 && row <= 6) return;
+      // ✅ reserve only a smaller 2-row-tall and 8-col-wide block for text
+      if (col >= 5 && col <= 12 && row >= 4 && row <= 5) return;
 
       applyContent(div,col,row);
       screen.appendChild(div);
