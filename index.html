@@ -75,8 +75,12 @@
       text-align: center;
       line-height: 1.1;
     }
+    .center-message span {
+      display:block;   /* ✅ force each one to its own line */
+      white-space:nowrap; /* ✅ prevent wrapping inside the line */
+    }
     .center-message .line1 {
-      font-size: 70px;   
+      font-size: 70px;
     }
     .center-message .line2 {
       font-size: 120px;
@@ -94,7 +98,6 @@
   <script>
     const screen = document.getElementById("screen");
 
-    // ✅ Full cleaned logo list (from your provided files)
     const logoUrls = [
       "Images/ALD.png","Images/ASUS.png","Images/ATDLogo.png","Images/BathingBrands.png",
       "Images/beautylish.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png",
