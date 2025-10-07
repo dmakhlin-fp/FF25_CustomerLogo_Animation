@@ -62,8 +62,8 @@
     }
 
     .center-message {
-      grid-column: 5 / span 8;   /* central block, leaves 4 logo columns left and right */
-      grid-row: 4 / span 2;      /* only 2 rows tall → no giant top/bottom space */
+      grid-column: 5 / span 8;
+      grid-row: 4 / span 2;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -76,15 +76,15 @@
       line-height: 1.1;
     }
     .center-message span {
-      display:block; 
+      display:block;
       white-space:nowrap;
     }
     .center-message .line1 {
-      font-size: 64px;   /* shrunk so it fits neatly in width */
+      font-size: 64px;
       margin-bottom: 16px;
     }
     .center-message .line2 {
-      font-size: 100px;  /* TOGETHER is larger focal point */
+      font-size: 100px;
     }
   </style>
 </head>
@@ -99,25 +99,32 @@
   <script>
     const screen = document.getElementById("screen");
 
+    // ✅ New full logo list
     const logoUrls = [
-      "Images/ALD.png","Images/ASUS.png","Images/ATDLogo.png","Images/BathingBrands.png",
-      "Images/beautylish.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png",
-      "Images/BlackDiamondEquipment.png","Images/Bombas.png","Images/Boxbollen.png",
-      "Images/CarCovers.com.png","Images/ClarkCoreServices.png","Images/Coulisse.png",
-      "Images/CozyEarth.png","Images/CSafeGlobal.png","Images/Cuyana.png","Images/Figs.png",
-      "Images/FreeportMcMoran.png","Images/HALFDAYSAPPAREL.png","Images/HiabFinlandOy.png",
-      "Images/HonestCompany.png","Images/JLab.png","Images/KateSomerville.png","Images/Laughland.png",
-      "Images/Lovevery.png","Images/Lululemon.png","Images/MadeIn.png","Images/MaticRobots.png",
-      "Images/MetropolitanHardwood.png","Images/MeUndies.png","Images/MilaniCosmetics.png",
-      "Images/MizzenMain.png","Images/MNMLLA.png","Images/NationalPens.png","Images/NorthAImports.png",
-      "Images/OurPlace.png","Images/OwletUS.png","Images/PatientPoint.png","Images/PlasticBank.png",
-      "Images/PlugableTechnologies.png","Images/PonbikeHolding.png","Images/ProclaimHealth.png",
-      "Images/QuirchFoods.png","Images/RadPowerBikes.png","Images/RayconGlobal.png","Images/RAZER.png",
-      "Images/Reformation.png","Images/remBeauty.png","Images/RhodeSkin.png","Images/RoveConcepts.png",
-      "Images/Ruggable.png","Images/Safilo.png","Images/Silfab.png","Images/Skydio.png","Images/Source86.png",
-      "Images/Stio.png","Images/Synopsys.png","Images/ThirdLove.png","Images/TrueReligion.png","Images/Uniek.png",
-      "Images/Valmont.png","Images/VusionGroup.png","Images/Wahl.png","Images/WahooFitness.png",
-      "Images/WindsongGlobal.png","Images/ZiaTile.png","Images/Zipline.png"
+      "Images/ALD.png","Images/ATDLogo.png","Images/BelleBrandsFullLogo.png","Images/BeyondYoga.png","Images/BlackDiamondEquipment.png",
+      "Images/BobrickWashroom_edit.png","Images/Bombas.png","Images/Boxbollen.png","Images/CSafeGlobal.png","Images/ClarkCoreServices.png",
+      "Images/Coulisse.png","Images/CozyEarth.png","Images/Cuyana.png","Images/Duer.png","Images/Figs.png","Images/FreeportMcMoran.png",
+      "Images/GlobeElectric.png","Images/HALFDAYSAPPAREL.png","Images/HiabFinlandOy.png","Images/HonestCompany.png","Images/Honeylove.png",
+      "Images/InterconFurniture.png","Images/JLab.png","Images/KateSomerville.png","Images/Laughland.png","Images/Littelfuse.png",
+      "Images/Lovevery.png","Images/Lululemon.png","Images/MNMLLA.png","Images/MadeIn.png","Images/Manduka.png","Images/MaticRobots.png",
+      "Images/MeUndies.png","Images/MetropolitanHardwood.png","Images/MilaniCosmetics.png","Images/MinnowSwim.png","Images/MizzenMain.png",
+      "Images/NJOY.png","Images/NadeauCorporation.png","Images/NationalPens.png","Images/Nobilia.png","Images/NorthAImports.png",
+      "Images/OurPlace.png","Images/PatientPoint.png","Images/PlasticBank.png","Images/PonbikeHolding.png","Images/QuirchFoods.png",
+      "Images/RAZER.png","Images/RhodeSkin.png","Images/RoveConcepts.png","Images/Ruggable.png","Images/Silfab.png","Images/Simplisafe.png",
+      "Images/Source86.png","Images/StarMicronics.png","Images/Stio.png","Images/StryderEyewearLLC.png","Images/StrytenEnergy.png",
+      "Images/StudioMcGee.png","Images/Synopsys.png","Images/TheWheelGroup.png","Images/ThirdLove.png","Images/TrueReligion.png",
+      "Images/Uniek.png","Images/Valmont.png","Images/VusionGroup.png","Images/WahooFitness.png","Images/WindsongGlobal.png",
+      "Images/ZiaTile.png","Images/ZodiacPoolSystems.png","Images/ZoundIndustries.png","Images/adidas.png","Images/alp_n_rock.png",
+      "Images/alpine_corporation.png","Images/american_omni.png","Images/balsam_brands.png","Images/beautylish.png","Images/butterfly_network_inc.png",
+      "Images/cakes_body_llc.png","Images/caraway.png","Images/dovetail_furniture.png","Images/dss_games.png","Images/everlane.png",
+      "Images/forum_brands.png","Images/guardian_bike_company.png","Images/hatch.png","Images/havenly.png","Images/hit_promotional_products.png",
+      "Images/joylux_inc.png","Images/kindred.png","Images/kizik.png","Images/kns_international.png","Images/krones_ag.png",
+      "Images/net_health_shops_llc_sunnydaze_decor.png","Images/northwest_trends.png","Images/olde_thompson.png","Images/optimas_manufacturing_solutions.png",
+      "Images/otter_products.png","Images/pact.png","Images/patterson_flynn.png","Images/perfect_game.png","Images/performance_labs_pte.png",
+      "Images/pkdc_llc_furniture_row.png","Images/portland_leather_goods.png","Images/rawlings.png","Images/remBeauty.png","Images/royce_too.png",
+      "Images/sarah_s_silks.png","Images/siemens_energy.png","Images/signature_products_group.png","Images/simplemodern.png","Images/skims.png",
+      "Images/sleep_geekz.png","Images/spacex.png","Images/spinrite_lp.png","Images/titan_brands.png","Images/topo_designs_llc.png",
+      "Images/trek.png","Images/university_furnishings.png","Images/vuori.png","Images/woodland_tools.png"
     ];
 
     const columns = 16, rows = 8, totalSlots = columns * rows;
@@ -148,7 +155,7 @@
       const col = (i % columns) + 1;
       const row = Math.floor(i / columns) + 1;
 
-      // ✅ reserve only a smaller 2-row-tall and 8-col-wide block for text
+      // Reserve only central message area
       if (col >= 5 && col <= 12 && row >= 4 && row <= 5) return;
 
       applyContent(div,col,row);
